@@ -19,6 +19,28 @@ def message_probability(user_message, recognised_words, single_response=False, r
         if word not in user_message:
             has_required_words = False
             break
+    
+    #
+    if has_required_words or single_response:
+        return int(percentage*100)
+    else:
+        return 0
+
+#
+def check_all_messages(message):
+    highest_prob_list = {}
+
+    def response(bot_response, list_of_words, single_response=False, required_words=[]):
+        nonlocal highest_prob_list
+        highest_prob_list[bot_response] = message_probability(message, list_of_words,single_response, require_words)
+
+    # Responses---------------------------------------------------------------------
+    response('Hello!', ['hello', 'hi', 'sup', 'hey', 'heyo'], single_response = True)
+    response('I\'m doing fine, and you?', ['how','are', 'you', 'doing'], required_words=['how'])
+    response('Thank you!', ['I', 'love', 'code', 'palace'], required_words=['code', 'palace'])
+
+    best_match = max(highest_prob_list, key=highest_prob_list.get)
+    print(highest_prob_list)
 
 def get_response(user_input):
     split_message = re.split(r'\s+|{,;?!.-]\s*', user_input.lower())
