@@ -42,6 +42,8 @@ def check_all_messages(message):
     best_match = max(highest_prob_list, key=highest_prob_list.get)
     print(highest_prob_list)
 
+    return best_match
+
 def get_response(user_input):
     split_message = re.split(r'\s+|{,;?!.-]\s*', user_input.lower())
     response = check_all_messages(split_message)
@@ -49,4 +51,4 @@ def get_response(user_input):
 
 # Testing response system
 while True:
-    print('Bot:' + get_response(input('You: ')))
+    print('Bot: ' + get_response(input('You: ')))
