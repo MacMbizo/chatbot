@@ -40,9 +40,9 @@ def check_all_messages(message):
     response('Thank you!', ['I', 'love', 'code', 'palace'], required_words=['code', 'palace'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
-    print(highest_prob_list)
+    #print(highest_prob_list)
 
-    return best_match
+    return long.unknown() if highest_prob_list[best_match] < 1 else best_match 
 
 def get_response(user_input):
     split_message = re.split(r'\s+|{,;?!.-]\s*', user_input.lower())
